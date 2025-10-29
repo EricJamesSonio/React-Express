@@ -4,6 +4,20 @@ Tech Stack :
 Frontend - React.js + Vite
 Backend - Express.js
 
+React.js 
+- Vite (For faster)
+- Axios (For api calling instead of fetch)
+- websockets install 
+- TypeScript (Optional for bug detection and strict)
+- bycrypt (Optional for hashing, converting hash etc.)
+- etc.
+
+
+Express.js
+- bycrypt (Optional For hashing passwords, keys etc.)
+- websockets install
+
+
 FullStack Plans, Infrastructure, Requirements, Helpers! etc.
 --> Personal Use
 --> Steps & Plan in building effective fullstack project!
@@ -12,6 +26,15 @@ FullStack Plans, Infrastructure, Requirements, Helpers! etc.
 --> Websockets to stay in sync 
 --> Flexible and adaptive database based on env. (docker or localhost) should work.
 --> Security
+
+Docker Set-up
+--> docker
+--> Maintain flexibility between local and Docker environments
+--> Keep local `.env` for development (XAMPP)
+--> Use `.env.docker` for containerized deployment
+--> Avoid code duplication and redundant configurations
+--> Support full-stack Docker orchestration (client, server, database)
+--> Ensure portability and consistency across environments
 
 --------------------------------------------------------------------------------------------
 
