@@ -2,43 +2,55 @@
 
 ## [Containers Overview]
 
-### 1. **app_server**
+### 1. **guitar-server**
 
-* Runs Node.js (Express) backend
+* Runs **Node.js (Express)** backend
 * Handles API requests and routes
-* Connects to MySQL container
+* Connects to the MySQL container
+* Uses `.env.docker` for environment config
 * Exposes port **5000**
 
-### 2. **app_client**
+---
 
-* Runs React (Vite) frontend via Nginx
+### 2. **guitar-client**
+
+* Runs **React (Vite)** frontend served by **Nginx**
 * Communicates with backend API
-* Serves static build
-* Exposes port **3000**
+* Serves static production build
+* Exposes port **3001**
 
-### 3. **app_db**
+---
 
-* Runs MySQL database
-* Stores all application data
-* Uses `.env.docker` for credentials
-* Persists data via `mysql_data` volume
+### 3. **guitar-db**
+
+* Runs **MySQL 8.1** database
+* Stores all backend and app data
+* Automatically creates database from `${DB_NAME}`
+* Persists data using **db_data** volume
 * Exposes port **3307**
 
-### 4. **initdb (optional)**
+---
 
-* Initializes and seeds database
-* Runs `initdb.js` for setup
-* Used for initial or test data population
+### 4. **guitar-initdb (manual)**
+
+* Initializes and seeds the database
+* Executes `npm run init-db` inside `/server`
+* Used for manual seeding or test data setup
+* Runs **only when manually triggered** via:
+
+  ```bash
+  docker-compose run --rm initdb
+  ```
 
 ---
 
 ## [Container Network]
 
-* Shared internal Docker network
-* Communication via container names
+* Shared internal **Docker bridge network**: `app-network`
+* Containers communicate using service names
 * External access points:
 
-  * Frontend → **[http://localhost:3000](http://localhost:3000)**
+  * Frontend → **[http://localhost:3001](http://localhost:3001)**
   * Backend → **[http://localhost:5000](http://localhost:5000)**
   * Database → **127.0.0.1:3307**
 
@@ -46,18 +58,23 @@
 
 ## [Result Summary]
 
-| Container  | Purpose         | Port | Access                                         |
-| ---------- | --------------- | ---- | ---------------------------------------------- |
-| app_server | Express Backend | 5000 | [http://localhost:5000](http://localhost:5000) |
-| app_client | React Frontend  | 3000 | [http://localhost:3000](http://localhost:3000) |
-| app_db     | MySQL Database  | 3307 | Internal / Localhost                           |
-| initdb     | Seed Setup      | N/A  | Auto-run (optional)                            |
+| Container     | Purpose                | Port | Access                                             |
+| ------------- | ---------------------- | ---- | -------------------------------------------------- |
+| guitar-server | Express Backend        | 5000 | [http://localhost:5000](http://localhost:5000)     |
+| guitar-client | React Frontend (Nginx) | 3001 | [http://localhost:3001](http://localhost:3001)     |
+| guitar-db     | MySQL Database         | 3307 | Internal / Localhost                               |
+| guitar-initdb | Manual DB Seeder       | N/A  | Run manually with `docker-compose run --rm initdb` |
 
 ---
 
 ## [Final Outcome]
 
-* Isolated and connected containers
-* Full-stack system in one environment
-* Persistent data and consistent configs
-* Run all with `docker-compose up --build`
+* **4 connected containers** under one Docker network
+* **Automatic startup** for `db`, `server`, and `client`
+* **Manual control** for `initdb` (no auto-run)
+* **Persistent MySQL data** with `db_data` volume
+* **Full-stack setup** easily launched using:
+
+  ```bash
+  docker-compose up -d --build
+  ```

@@ -28,6 +28,7 @@ FullStack Plans, Infrastructure, Requirements, Helpers! etc.
 * Security
 
 Docker Set-up
+* Docker files and Docker-compose comese from https://github.com/EricJamesSonio/Guitar-store
 * docker
 * Maintain flexibility between local and Docker environments
 * Keep local `.env` for development (XAMPP)

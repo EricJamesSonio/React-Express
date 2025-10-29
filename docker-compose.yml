@@ -1,0 +1,80 @@
+services:
+  db:
+    image: mysql:8.1
+    container_name: guitar-db
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
+
+  initdb:
+    build:
+      context: ./server
+    container_name: guitar-initdb
+    command: ["npm", "run", "init-db"]
+    working_dir: /app
+    volumes:
+      - ./server:/app
+    env_file:
+      - .env.docker
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+    networks:
+      - app-network
+
+  server:
+    build:
+      context: ./server
+    container_name: guitar-server
+    restart: always
+    env_file:
+      - .env.docker
+    environment:
+      NODE_ENV: docker
+      DOCKER_ENV_FILE: .env.docker
+      DB_HOST: db
+      DB_PORT: 3306
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    command: npm start
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  client:
+    build:
+      context: ./client
+    container_name: guitar-client
+    restart: always
+    ports:
+      - "3001:80"
+    networks:
+      - app-network
+    depends_on:
+      - server
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
