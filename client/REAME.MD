@@ -9,6 +9,9 @@ Plans:
 * SOLID and DRY principles
 * Maintainable and scalable React setup
 
+Bonus:
+* Use nginx to have config of api calls!
+
 ---
 
 ## [Folder Structure]
