@@ -63,5 +63,5 @@ SOME DETAILS:
 
 [FullStack] - Root Folder
 
---> [Client] - This is the Frontend Side! read The README.MD of that folder!
---> [Server] - This is the Backend Side! read The README.MD of that folder!
+* [Client] - This is the Frontend Side! read The README.MD of that folder!
+* [Server] - This is the Backend Side! read The README.MD of that folder!
