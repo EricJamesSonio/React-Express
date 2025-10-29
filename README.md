@@ -1,8 +1,8 @@
 Start Date : October 29, 2025
 
 Tech Stack :
-Frontend - React.js + Vite
-Backend - Express.js
+* Frontend - React.js + Vite
+* Backend - Express.js
 
 React.js 
 - Vite (For faster)
