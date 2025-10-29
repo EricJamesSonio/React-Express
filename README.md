@@ -19,22 +19,22 @@ Express.js
 
 
 FullStack Plans, Infrastructure, Requirements, Helpers! etc.
---> Personal Use
---> Steps & Plan in building effective fullstack project!
---> Making clean fullstack project, managing folders, codes, strategies, designs
---> Reusable codes
---> Websockets to stay in sync 
---> Flexible and adaptive database based on env. (docker or localhost) should work.
---> Security
+* Personal Use
+* Steps & Plan in building effective fullstack project!
+* Making clean fullstack project, managing folders, codes, strategies, designs
+* Reusable codes
+* Websockets to stay in sync 
+* Flexible and adaptive database based on env. (docker or localhost) should work.
+* Security
 
 Docker Set-up
---> docker
---> Maintain flexibility between local and Docker environments
---> Keep local `.env` for development (XAMPP)
---> Use `.env.docker` for containerized deployment
---> Avoid code duplication and redundant configurations
---> Support full-stack Docker orchestration (client, server, database)
---> Ensure portability and consistency across environments
+* docker
+* Maintain flexibility between local and Docker environments
+* Keep local `.env` for development (XAMPP)
+* Use `.env.docker` for containerized deployment
+* Avoid code duplication and redundant configurations
+* Support full-stack Docker orchestration (client, server, database)
+* Ensure portability and consistency across environments
 
 --------------------------------------------------------------------------------------------
 
